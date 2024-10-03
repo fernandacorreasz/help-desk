@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Select, DatePicker, Layout, message } from 'antd';
+import { Form, Input, Button, Select, DatePicker, Radio, Layout, message } from 'antd';
 
 const { Content } = Layout;
 const { TextArea } = Input;
@@ -9,7 +9,6 @@ const CriarTicketAnalista: React.FC = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values: unknown) => {
-    // Aqui você pode adicionar a lógica de envio dos dados para a API ou estado local
     console.log('Ticket Criado:', values);
     message.success('Ticket criado com sucesso!');
     form.resetFields();
@@ -22,7 +21,7 @@ const CriarTicketAnalista: React.FC = () => {
         form={form}
         layout="vertical"
         onFinish={onFinish}
-        initialValues={{ prioridade: 'Média' }} // Definindo uma prioridade padrão
+        initialValues={{ prioridade: 'Média' }}
       >
         <Form.Item
           name="titulo"
@@ -71,6 +70,52 @@ const CriarTicketAnalista: React.FC = () => {
           rules={[{ required: true, message: 'Por favor, selecione a data de abertura' }]}
         >
           <DatePicker style={{ width: '100%' }} />
+        </Form.Item>
+
+        {/* Campos adicionais para opções específicas */}
+        <Form.Item
+          name="sistemaOff"
+          label="Sistema Off?"
+          rules={[{ required: true, message: 'Por favor, selecione uma opção' }]}
+        >
+          <Radio.Group>
+            <Radio value="Sim">Sim</Radio>
+            <Radio value="Não">Não</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item
+          name="rotinaInterrompida"
+          label="Rotina Interrompida?"
+          rules={[{ required: true, message: 'Por favor, selecione uma opção' }]}
+        >
+          <Radio.Group>
+            <Radio value="Sim">Sim</Radio>
+            <Radio value="Não">Não</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item
+          name="ambienteOnPremise"
+          label="Ambiente OnPremise?"
+          rules={[{ required: true, message: 'Por favor, selecione uma opção' }]}
+        >
+          <Radio.Group>
+            <Radio value="Sim">Sim</Radio>
+            <Radio value="Não">Não</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item
+          name="status"
+          label="Status"
+          rules={[{ required: true, message: 'Por favor, selecione o status do ticket' }]}
+        >
+          <Radio.Group>
+            <Radio value="Aberto">Aberto</Radio>
+            <Radio value="Em andamento">Em andamento</Radio>
+            <Radio value="Resolvido">Resolvido</Radio>
+          </Radio.Group>
         </Form.Item>
 
         <Form.Item>

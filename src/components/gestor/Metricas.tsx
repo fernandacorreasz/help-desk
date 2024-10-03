@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Card, Row, Col } from 'antd';
+import { Layout, Card, Typography } from 'antd';
 import { Bar, Line, Pie, Radar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -15,7 +15,6 @@ import {
   RadialLinearScale,
 } from 'chart.js';
 
-// Registrar componentes necessários do Chart.js
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -30,6 +29,7 @@ ChartJS.register(
 );
 
 const { Content } = Layout;
+const { Paragraph } = Typography;
 
 // Dados para gráficos
 const dataTicketsPorCategoria = {
@@ -47,6 +47,8 @@ const dataTicketsPorCategoria = {
     },
   ],
 };
+
+
 
 const dataTempoResolucao = {
   labels: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4'],
@@ -89,7 +91,6 @@ const dataViolacaoSLA = {
   ],
 };
 
-// Dados para satisfação do cliente
 const dataSatisfacaoCliente = {
   labels: ['1 Estrela', '2 Estrelas', '3 Estrelas', '4 Estrelas', '5 Estrelas'],
   datasets: [
@@ -107,7 +108,6 @@ const dataSatisfacaoCliente = {
   ],
 };
 
-// Dados para a Taxa de Resolução no Primeiro Contato
 const dataTaxaResolucaoPrimeiroContato = {
   labels: ['Software', 'Hardware', 'Rede', 'Outros'],
   datasets: [
@@ -122,44 +122,56 @@ const dataTaxaResolucaoPrimeiroContato = {
 
 const Metricas: React.FC = () => {
   return (
-    <Content style={{ padding: '24px', background: '#fff' }}>
-      <h1>Métricas</h1>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} lg={12}>
-          <Card title="Número de Tickets por Categoria" bordered={true}>
-            <Bar data={dataTicketsPorCategoria} />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card title="Tempo Médio de Resolução" bordered={true}>
-            <Line data={dataTempoResolucao} />
-          </Card>
-        </Col>
-      </Row>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} lg={12}>
-          <Card title="Número de Tickets por Status" bordered={true}>
-            <Pie data={dataTicketsPorStatus} />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card title="Número de Violações de SLA" bordered={true}>
-            <Bar data={dataViolacaoSLA} />
-          </Card>
-        </Col>
-      </Row>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} lg={12}>
-          <Card title="Avaliação de Satisfação do Cliente" bordered={true}>
-            <Pie data={dataSatisfacaoCliente} />
-          </Card>
-        </Col>
-        <Col xs={24} lg={12}>
-          <Card title="Taxa de Resolução no Primeiro Contato" bordered={true}>
-            <Radar data={dataTaxaResolucaoPrimeiroContato} />
-          </Card>
-        </Col>
-      </Row>
+    <Content style={{ padding: '24px', background: '#fff', maxWidth: '600px', margin: '0 auto' }}>
+      <h1>Métricas do Sistema</h1>
+
+      {/* Gráfico 1: Número de Tickets por Categoria */}
+      <Card title="Número de Tickets por Categoria" bordered={true} style={{ marginBottom: '24px' }}>
+        <Bar data={dataTicketsPorCategoria} />
+        <Paragraph style={{ marginTop: '16px' }}>
+          Este gráfico mostra a distribuição dos tickets abertos por categoria. É possível identificar quais áreas (Software, Hardware, Rede, etc.) têm gerado mais chamados.
+        </Paragraph>
+      </Card>
+
+      {/* Gráfico 2: Tempo Médio de Resolução */}
+      <Card title="Tempo Médio de Resolução" bordered={true} style={{ marginBottom: '24px' }}>
+        <Line data={dataTempoResolucao} />
+        <Paragraph style={{ marginTop: '16px' }}>
+          O gráfico exibe o tempo médio de resolução dos tickets por semana. Isso ajuda a monitorar a eficiência da equipe de suporte ao longo do tempo.
+        </Paragraph>
+      </Card>
+
+      {/* Gráfico 3: Número de Tickets por Status */}
+      <Card title="Número de Tickets por Status" bordered={true} style={{ marginBottom: '24px' }}>
+        <Pie data={dataTicketsPorStatus} />
+        <Paragraph style={{ marginTop: '16px' }}>
+          Este gráfico mostra a proporção de tickets abertos, fechados e em andamento. Ele é útil para acompanhar o fluxo de trabalho atual.
+        </Paragraph>
+      </Card>
+
+      {/* Gráfico 4: Violações de SLA */}
+      <Card title="Número de Violações de SLA" bordered={true} style={{ marginBottom: '24px' }}>
+        <Bar data={dataViolacaoSLA} />
+        <Paragraph style={{ marginTop: '16px' }}>
+          Este gráfico exibe a quantidade de violações de SLA (Acordos de Nível de Serviço) por semana. É essencial para medir a conformidade com os SLAs acordados.
+        </Paragraph>
+      </Card>
+
+      {/* Gráfico 5: Avaliação de Satisfação do Cliente */}
+      <Card title="Avaliação de Satisfação do Cliente" bordered={true} style={{ marginBottom: '24px' }}>
+        <Pie data={dataSatisfacaoCliente} />
+        <Paragraph style={{ marginTop: '16px' }}>
+          Exibe a distribuição de avaliações de satisfação dos clientes, que é uma métrica importante para avaliar a qualidade do suporte oferecido.
+        </Paragraph>
+      </Card>
+
+      {/* Gráfico 6: Taxa de Resolução no Primeiro Contato */}
+      <Card title="Taxa de Resolução no Primeiro Contato" bordered={true} style={{ marginBottom: '24px' }}>
+        <Radar data={dataTaxaResolucaoPrimeiroContato} />
+        <Paragraph style={{ marginTop: '16px' }}>
+          Este gráfico mostra a porcentagem de tickets resolvidos no primeiro contato com o cliente, uma métrica fundamental para medir a eficácia do atendimento inicial.
+        </Paragraph>
+      </Card>
     </Content>
   );
 };

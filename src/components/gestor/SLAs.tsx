@@ -1,7 +1,8 @@
 import React from 'react';
-import { Layout, Form, InputNumber, Button } from 'antd';
+import { Layout, Form, InputNumber, Button, Alert, Select, Input } from 'antd';
 
 const { Content } = Layout;
+const { Option } = Select;
 
 const SLAs: React.FC = () => {
   const onFinish = (values: unknown) => {
@@ -9,8 +10,18 @@ const SLAs: React.FC = () => {
   };
 
   return (
-    <Content style={{ padding: '24px', background: '#fff', maxWidth: '600px', margin: '0 auto' }}>
+    <Content style={{ padding: '24px', background: '#fff', maxWidth: '800px', margin: '0 auto' }}>
       <h1>Configuração de SLAs</h1>
+
+      {/* Descrição sobre a tela de configuração de SLAs */}
+      <Alert
+        message="Configuração de Acordos de Nível de Serviço (SLAs)"
+        description="Nesta tela, o gestor pode definir os tempos máximos de resolução para diferentes categorias de tickets, ou aplicar configurações a um ticket específico. Essas configurações impactam diretamente os tickets abertos, determinando se um ticket violou ou está em conformidade com o SLA."
+        type="info"
+        showIcon
+        style={{ marginBottom: '24px' }}
+      />
+
       <Form
         name="slas"
         labelCol={{ span: 16 }}
@@ -18,15 +29,57 @@ const SLAs: React.FC = () => {
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Form.Item label="SLA para Incidentes Críticos (horas)" name="incidenteCritico">
-          <InputNumber min={1} />
+        {/* Seleção de categoria de ticket */}
+        <Form.Item
+          label="Categoria de Ticket"
+          name="categoriaTicket"
+          rules={[{ required: true, message: 'Por favor, selecione uma categoria de ticket.' }]}
+        >
+          <Select placeholder="Selecione uma categoria de ticket">
+            <Option value="software">Software</Option>
+            <Option value="hardware">Hardware</Option>
+            <Option value="rede">Rede</Option>
+            <Option value="outros">Outros</Option>
+          </Select>
         </Form.Item>
-        <Form.Item label="SLA para Incidentes Médios (horas)" name="incidenteMedio">
-          <InputNumber min={1} />
+
+        {/* Identificador do Ticket */}
+        <Form.Item
+          label="Identificador do Ticket (Opcional)"
+          name="identificadorTicket"
+          rules={[{ required: false }]}
+        >
+          <Input placeholder="Digite o ID do ticket, se aplicável" />
         </Form.Item>
-        <Form.Item label="SLA para Incidentes Baixos (horas)" name="incidenteBaixo">
-          <InputNumber min={1} />
+
+        {/* Configuração de SLA para incidentes críticos */}
+        <Form.Item
+          label="SLA para Incidentes Críticos (horas)"
+          name="incidenteCritico"
+          rules={[{ required: true, message: 'Por favor, defina o SLA para incidentes críticos.' }]}
+        >
+          <InputNumber min={1} placeholder="Ex: 4 horas" />
         </Form.Item>
+
+        {/* Configuração de SLA para incidentes médios */}
+        <Form.Item
+          label="SLA para Incidentes Médios (horas)"
+          name="incidenteMedio"
+          rules={[{ required: true, message: 'Por favor, defina o SLA para incidentes médios.' }]}
+        >
+          <InputNumber min={1} placeholder="Ex: 8 horas" />
+        </Form.Item>
+
+        {/* Configuração de SLA para incidentes baixos */}
+        <Form.Item
+          label="SLA para Incidentes Baixos (horas)"
+          name="incidenteBaixo"
+          rules={[{ required: true, message: 'Por favor, defina o SLA para incidentes baixos.' }]}
+        >
+          <InputNumber min={1} placeholder="Ex: 24 horas" />
+        </Form.Item>
+
+        {/* Botão de submissão */}
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
             Salvar SLAs

@@ -1,25 +1,22 @@
 import React from 'react';
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, DatePicker, Layout, Radio } from 'antd';
+
+const { Content } = Layout;
+const { TextArea } = Input;
 
 const NovoTicket: React.FC = () => {
   const onFinish = (values: unknown) => {
     console.log('Success:', values);
   };
 
-  const onFinishFailed = (errorInfo: unknown) => {
-    console.log('Failed:', errorInfo);
-  };
-
   return (
-    <div style={{ padding: '24px', background: '#fff', maxWidth: '600px', margin: '0 auto' }}>
+    <Content style={{ padding: '24px', background: '#fff', maxWidth: '600px', margin: '0 auto' }}>
       <h1>Criar Novo Ticket</h1>
       <Form
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         <Form.Item
@@ -27,7 +24,7 @@ const NovoTicket: React.FC = () => {
           name="title"
           rules={[{ required: true, message: 'Por favor, insira o título do ticket!' }]}
         >
-          <Input />
+          <Input placeholder="Digite o título do ticket" />
         </Form.Item>
 
         <Form.Item
@@ -35,8 +32,39 @@ const NovoTicket: React.FC = () => {
           name="description"
           rules={[{ required: true, message: 'Por favor, insira a descrição do ticket!' }]}
         >
-          <Input.TextArea />
+          <TextArea rows={4} placeholder="Descreva o problema" />
         </Form.Item>
+
+        <Form.Item
+          label="Data de Abertura"
+          name="date"
+          rules={[{ required: true, message: 'Por favor, selecione a data de abertura!' }]}
+        >
+          <DatePicker style={{ width: '100%' }} />
+        </Form.Item>
+
+        {/* Campos adicionais */}
+        <Form.Item
+          name="sistemaOff"
+          label="Sistema Off?"
+          rules={[{ required: true, message: 'Por favor, selecione uma opção' }]}
+        >
+          <Radio.Group>
+            <Radio value="Sim">Sim</Radio>
+            <Radio value="Não">Não</Radio>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item
+          name="rotinaInterrompida"
+          label="Rotina Interrompida?"
+          rules={[{ required: true, message: 'Por favor, selecione uma opção' }]}>
+          <Radio.Group>
+            <Radio value="Sim">Sim</Radio>
+            <Radio value="Não">Não</Radio>
+          </Radio.Group>
+        </Form.Item>
+
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
@@ -44,7 +72,7 @@ const NovoTicket: React.FC = () => {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+    </Content>
   );
 };
 

@@ -9,7 +9,6 @@ import Relatorios from "./components/usuario/RelatoriosTicketsAbertos";
 import { Layout } from "antd";
 import Aprovacoes from "./components/gestor/Aprovacoes";
 import Metricas from "./components/gestor/Metricas";
-import Analista from "./pages/Analista";
 import HistoricoTicketsAnalista from "./components/analista/HistoricoTicketsAnalista";
 import ConfiguracoesPerfil from "./components/analista/ConfiguracaoPerfil";
 import Notificacoes from "./components/analista/Notificacoes";
@@ -21,6 +20,10 @@ import NotificacoesUsuario from "./components/usuario/NotificacoesUser";
 import GerenciamentoUsuarios from "./components/gestor/GerenciamentoUsuarios";
 import NotificacoesGestor from "./components/gestor/NotificacoesGestor";
 import SLAs from "./components/gestor/SLAs";
+import RelatoriosGestor from "./components/gestor/Relatorios";
+import ConfiguracoesPerfilUser from "./components/usuario/ConfiguracaoPerfil";
+import DashboardAnalista from "./components/analista/DashboardAnalista";
+import DashboardUsuario from "./components/usuario/DashboardUsuario";
 
 const { Content } = Layout;
 
@@ -46,7 +49,7 @@ const App: React.FC = () => (
                     minHeight: 280,
                   }}
                 >
-                  <Usuario />
+                  <DashboardUsuario />
                 </Content>
               </Layout>
             </Layout>
@@ -116,7 +119,7 @@ const App: React.FC = () => (
           path="/usuario/configuracoes"
           element={
             <Layout hasSider style={{ display: "flex" }}>
-              <SidebarAnalista />
+            <SidebarUsuario />
               <Layout className="site-layout" style={{ flex: 1 }}>
                 <Content
                   style={{
@@ -126,7 +129,7 @@ const App: React.FC = () => (
                     minHeight: 280,
                   }}
                 >
-                  <ConfiguracoesPerfil />
+                  <ConfiguracoesPerfilUser />
                 </Content>
               </Layout>
             </Layout>
@@ -189,7 +192,7 @@ const App: React.FC = () => (
                     minHeight: 280,
                   }}
                 >
-                  <Analista />
+                  <DashboardAnalista />
                 </Content>
               </Layout>
             </Layout>
@@ -379,7 +382,7 @@ const App: React.FC = () => (
           element={
             <Layout hasSider style={{ display: 'flex' }}>
               <SidebarGestor />
-              <Relatorios />
+              <RelatoriosGestor />
             </Layout>
           }
         />
