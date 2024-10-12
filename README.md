@@ -1,8 +1,13 @@
+
+https://github.com/user-attachments/assets/bee183aa-2264-4121-aa0d-e758a64b5838
 # AidPoint Help Desk
 AidPoint é um sistema desenvolvido de forma educacional de Help Desk desenvolvido para suportar usuários finais, analistas e gestores.
 A aplicação permite a criação, acompanhamento e gerenciamento de tickets de suporte, além de fornecer métricas,
 aprovações de mudanças e configurações de SLAs, com base nos princípios do ITIL.
-https://github.com/user-attachments/assets/6294f9dd-276f-4e48-99ac-85a7df82099a
+
+
+https://github.com/user-attachments/assets/e415d663-c27a-4eda-b643-767f06ddab83
+
 ## Tecnologias Utilizadas
 - **React**: Biblioteca para construção de interfaces de usuário.
 - **Ant Design (AntD)**: Biblioteca de componentes para construção de UI.
